@@ -13,7 +13,7 @@ function BasicCard(front, back){
 
 };
 
-var card = new BasicCard("This is a test","test");
+// var card = new BasicCard("This is a test","test");
 
 
 function ClozeCard(text, cloze)
@@ -25,21 +25,30 @@ function ClozeCard(text, cloze)
         this.cloze = cloze;
 
         //Cloze card that returns the deleted part of the card w/ ...
-        this.clozeDeleted = function()
+        this.deletedText = function()
         {
 
-            var answer = text.replace(cloze, "...");
+            var deletedAnswer = this.text.replace(this.cloze, "...");
             
-            return console.log(answer);
+            return console.log(deletedAnswer);
         }
 
         //Close card that returns the partial part of the card.
-        this.partialCloze = function()
+        this.partialText = function()
         {
             
+            var partialAnswer = text.replace(this.cloze, " ");
 
+            return console.log(partialAnswer);
             
         }   
+
+        this.fullText = function()
+        {
+            var fullTextAnswer = this.text;
+
+            return console.log(fullTextAnswer);
+        }
     }else
     {
         return new ClozeCard(text, cloze);
@@ -52,7 +61,9 @@ BasicCard.prototype.printCard = function()
     console.log("\nFrontOfCard: " + this.front + "\nBackOfCard: " + this.back);
 }
 
-var card = new BasicCard("This is a test","test");
+var card = ClozeCard("This is a test","test");
 
-console.log(card);
+card.deletedText();
+card.partialText();
+card.fullText();
 
